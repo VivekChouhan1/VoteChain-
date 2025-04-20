@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoteChain Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-brand">
+                <i class="fas fa-vote-yea"></i>
+                <h1>VoteChain</h1>
+            </div>
+            <div class="user-controls">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="username-display">User</span>
+                </div>
+                <button id="logout-btn" class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-grid">
+                <!-- Event Selection Card -->
+                <section id="event-selection-section" class="card">
+                    <div class="card-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h2>Select Voting Event</h2>
+                    </div>
+                    <div class="card-content">
+                        <select id="event-select" class="styled-select">
+                            <option value="">-- Select an Event --</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Voting Section -->
+                <section id="voting-section" class="card" style="display: none;">
+                    <div class="card-header">
+                        <i class="fas fa-check-circle"></i>
+                        <h2 id="voting-event-name">Cast Your Vote</h2>
+                    </div>
+                    <div class="card-content">
+                        <form id="vote-form" class="vote-form">
+                            <p class="form-label">Select your preferred candidate:</p>
+                            <div id="candidate-list" class="candidate-list">
+                                <div class="loading-spinner">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading candidates...</p>
+                                </div>
+                            </div>
+                            <button type="submit" id="submit-vote-btn" class="action-button primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Vote
+                            </button>
+                        </form>
+                        <div class="message-container">
+                            <p id="vote-error-message" class="error-text"></p>
+                            <p id="vote-success-message" class="success-text"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="results-section" class="card" style="display: none;">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h2 id="results-event-name">Current Results</h2>
+                    </div>
+                    <div class="card-content">
+                        <div id="results-display" class="results-container">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-pie"></i>
+                                <p>Select an event to view results.</p>
+                            </div>
+                        </div>
+                        <div class="live-update-indicator">
+                            <i class="fas fa-sync-alt fa-spin"></i>
+                            <p class="last-updated">Live Updates Enabled</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Blockchain Viewer -->
+                <section id="blockchain-viewer" class="card">
+                    <div class="card-header">
+                        <i class="fas fa-link"></i>
+                        <h2>Blockchain Verification</h2>
+                    </div>
+                    <div class="card-content">
+                        <button id="view-blockchain-btn" class="secondary-button">
+                            <i class="fas fa-eye"></i>
+                            View Blockchain
+                        </button>
+                        <div class="blockchain-container">
+                            <pre id="blockchain-data">Blockchain data will appear here...</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Notification System -->
+        <div id="notification" class="notification">
+            <i class="fas fa-info-circle"></i>
+            <span class="notification-message"></span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 VoteChain Project</p>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-shield-alt"></i> Security</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

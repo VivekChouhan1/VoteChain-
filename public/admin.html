@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - VoteChain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="dashboard-container admin-dashboard">
+        <!-- Simple Header -->
+        <header class="admin-header">
+            <h1>VoteChain Admin Panel</h1>
+            <div class="admin-controls">
+                <span>Welcome, <span id="admin-username-display">Admin</span></span>
+                <button id="logout-btn" class="logout-button">Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <main class="admin-grid">
+            <!-- Create Event Card -->
+            <section id="create-event-section" class="card">
+                <h2>Create New Event</h2>
+                <form id="create-event-form">
+                    <div class="form-group">
+                        <label for="event-name">Event Name</label>
+                        <input type="text" id="event-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Description (Optional)</label>
+                        <textarea id="event-description"></textarea>
+                    </div>
+                    <button type="submit" class="action-button">Create Event</button>
+                </form>
+                <p id="event-message" class="message-text"></p>
+            </section>
+
+            <!-- Add Candidate Card -->
+            <section id="add-candidate-section" class="card">
+                <h2>Add Candidate to Event</h2>
+                <form id="add-candidate-form">
+                    <div class="form-group">
+                        <label for="candidate-event-select">Select Event</label>
+                        <select id="candidate-event-select" required>
+                            <option value="">-- Select Event --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidate-name">Candidate Name</label>
+                        <input type="text" id="candidate-name" required>
+                    </div>
+                    <button type="submit" class="action-button">Add Candidate</button>
+                </form>
+                <p id="candidate-message" class="message-text"></p>
+            </section>
+
+            <!-- Create User Card -->
+            <section id="create-user-section" class="card">
+                <h2>Create User</h2>
+                <form id="create-user-form">
+                    <div class="form-group">
+                        <label for="new-username">Username</label>
+                        <input type="text" id="new-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Password</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="make-admin">
+                        <label for="make-admin">Make Admin?</label>
+                    </div>
+                    <button type="submit" class="action-button">Create User</button>
+                </form>
+                <p id="user-message" class="message-text"></p>
+            </section>
+
+            <!-- Events Overview Section -->
+            <section id="overview-section" class="card full-width">
+                <h2>Events Overview & Live Results</h2>
+                <div id="admin-events-display">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading events and results...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blockchain Viewer Section -->
+            <section id="admin-blockchain-viewer" class="card full-width">
+                <h2>Blockchain Verification</h2>
+                <button id="admin-view-blockchain-btn" class="secondary-button">View Blockchain</button>
+                <div class="blockchain-container">
+                    <pre id="admin-blockchain-data">Blockchain data will appear here...</pre>
+                </div>
+            </section>
+        </main>
+
+        <!-- Notification Area -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
